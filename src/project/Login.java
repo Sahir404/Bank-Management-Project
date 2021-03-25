@@ -53,7 +53,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("User Id ");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 100, 50, 14);
+        jLabel2.setBounds(60, 100, 50, 14);
 
         Name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

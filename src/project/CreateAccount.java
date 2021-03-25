@@ -39,8 +39,9 @@ public class CreateAccount extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBounds(new java.awt.Rectangle(500, 200, 300, 500));
+        setBounds(new java.awt.Rectangle(300, 400, 300, 500));
         setResizable(false);
+        setSize(new java.awt.Dimension(500, 500));
 
         jLabel1.setFont(new java.awt.Font("Elephant", 0, 18)); // NOI18N
         jLabel1.setText("Create Account");
