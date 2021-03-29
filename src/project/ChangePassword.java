@@ -37,6 +37,7 @@ public class ChangePassword extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 200, 0, 0));
+        setResizable(false);
 
         jLabel1.setText("Old Password");
 

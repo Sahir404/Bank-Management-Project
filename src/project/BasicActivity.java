@@ -8,6 +8,7 @@ package project;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 
+
 /**
  *
  * @author DeadTrigger
@@ -44,17 +45,20 @@ public class BasicActivity extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 200, 500, 300));
-        setMinimumSize(new java.awt.Dimension(700, 400));
+        setMinimumSize(new java.awt.Dimension(600, 600));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Wide Latin", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Welcome To Aladin Bank");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 20, 550, 60);
+        jLabel1.setBounds(0, 20, 560, 100);
 
-        Manager_button.setFont(new java.awt.Font("Goudy Stout", 0, 12)); // NOI18N
+        Manager_button.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         Manager_button.setText("As Manager ");
         Manager_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,9 +66,9 @@ public class BasicActivity extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Manager_button);
-        Manager_button.setBounds(140, 100, 260, 50);
+        Manager_button.setBounds(140, 130, 260, 50);
 
-        Customer_button.setFont(new java.awt.Font("Goudy Stout", 0, 12)); // NOI18N
+        Customer_button.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         Customer_button.setText("As Customer");
         Customer_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,10 +76,10 @@ public class BasicActivity extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Customer_button);
-        Customer_button.setBounds(140, 170, 260, 60);
+        Customer_button.setBounds(140, 190, 260, 60);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(20, 20, 560, 240);
+        jPanel1.setBounds(10, 20, 570, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -83,7 +87,7 @@ public class BasicActivity extends javax.swing.JFrame {
     private void Manager_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Manager_buttonActionPerformed
         // TODO add your handling code here:
         close();
-        Login login =new Login();
+       Login login =new Login();
         login.setVisible(true);
         login.visibleCreateAccount(false);
         
