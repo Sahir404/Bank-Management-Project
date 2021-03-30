@@ -46,29 +46,29 @@ public class Information extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         jLabel1.setText("INFORMATION");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("Name");
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("Father's Name");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("Date Of Birth");
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setText("Gender");
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setText("CNIC Number");
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setText("Phone NUmber");
 
-        jLabel8.setText("jLabel8");
+        jLabel8.setText("Email Address");
 
-        jLabel9.setText("jLabel9");
+        jLabel9.setText("Home Address");
 
-        jLabel10.setText("jLabel10");
+        jLabel10.setText("City");
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setText("Province");
 
-        jLabel12.setText("jLabel12");
+        jLabel12.setText("Occupation");
 
-        jLabel13.setText("jLabel13");
+        jLabel13.setText("Religion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,7 +125,7 @@ public class Information extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
