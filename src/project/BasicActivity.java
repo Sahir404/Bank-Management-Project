@@ -49,6 +49,11 @@ public class BasicActivity extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
@@ -76,7 +81,7 @@ public class BasicActivity extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Customer_button);
-        Customer_button.setBounds(140, 190, 260, 60);
+        Customer_button.setBounds(140, 190, 260, 50);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 20, 570, 330);
@@ -100,6 +105,12 @@ public class BasicActivity extends javax.swing.JFrame {
         login.setVisible(true);
         login.visibleCreateAccount(true);
     }//GEN-LAST:event_Customer_buttonActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jPanel1MouseClicked
 
     /**
      * @param args the command line arguments
