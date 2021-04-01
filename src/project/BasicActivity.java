@@ -14,17 +14,12 @@ import java.awt.event.WindowEvent;
  * @author DeadTrigger
  */
 
-public class BasicActivity extends javax.swing.JFrame {
-
+public class BasicActivity extends javax.swing.JFrame  {
+    
     /**
      * Creates new form BasicActivity
      */
-     public void close(){
- 
- WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
- Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
- 
- }
+     private String check ;
     public BasicActivity() {
         initComponents();
     }
@@ -88,22 +83,28 @@ public class BasicActivity extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void Manager_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Manager_buttonActionPerformed
         // TODO add your handling code here:
         close();
        Login login =new Login();
         login.setVisible(true);
         login.visibleCreateAccount(false);
+        login.setCheck("Manager");
+        
+        
         
     }//GEN-LAST:event_Manager_buttonActionPerformed
-
+    
     private void Customer_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Customer_buttonActionPerformed
         // TODO add your handling code here:
         close();
          Login login =new Login();
         login.setVisible(true);
         login.visibleCreateAccount(true);
+        login.setCheck("Customer");
+        
+        
     }//GEN-LAST:event_Customer_buttonActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
@@ -111,7 +112,8 @@ public class BasicActivity extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jPanel1MouseClicked
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -153,4 +155,15 @@ public class BasicActivity extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+
+    
+        
+    
 }

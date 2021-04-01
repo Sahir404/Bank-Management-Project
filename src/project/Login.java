@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
     {
         newaccount.setVisible(j);
     }
-
+     String check; 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,10 +70,20 @@ public class Login extends javax.swing.JFrame {
         Password.setBounds(140, 140, 210, 30);
 
         Login_btn.setText("Login");
+        Login_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Login_btnActionPerformed(evt);
+            }
+        });
         getContentPane().add(Login_btn);
         Login_btn.setBounds(190, 200, 90, 23);
 
         newaccount.setText("Create new account");
+        newaccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newaccountMouseClicked(evt);
+            }
+        });
         getContentPane().add(newaccount);
         newaccount.setBounds(190, 240, 160, 30);
 
@@ -83,6 +93,40 @@ public class Login extends javax.swing.JFrame {
     private void NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NameActionPerformed
+     String s;
+    private void newaccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newaccountMouseClicked
+        // TODO add your handling code here:
+        CreateAccount CA = new CreateAccount();
+        CA.setVisible(true);
+        
+    }//GEN-LAST:event_newaccountMouseClicked
+    
+    private void Login_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_btnActionPerformed
+        // TODO add your handling code here:
+        String name = Name.getText().toString();
+        Password.getText();
+        if(getCheck()== "Manager")
+        {
+            
+            ManagerMainScreen mms = new ManagerMainScreen();
+            mms.setVisible(true);
+            
+            
+            
+        }
+        if(getCheck()== "Customer")
+        {
+            
+            CustomerMainScr CMS = new CustomerMainScr();
+            CMS.setVisible(true);
+            
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_Login_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,4 +172,13 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel newaccount;
     // End of variables declaration//GEN-END:variables
+
+ public String getCheck() {
+        return check;
+    }
+
+    public void setCheck(String check) {
+        this.check = check;
+    }
+
 }

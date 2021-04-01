@@ -142,7 +142,7 @@ public class Investment extends javax.swing.JFrame {
         // TODO add your handling code here:
        this.toBack();
        setVisible(false);
-       new desh().toFront();
+       new CustomerMainScr().toFront();
     }//GEN-LAST:event_backActionPerformed
 
     /**

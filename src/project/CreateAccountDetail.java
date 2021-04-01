@@ -5,7 +5,9 @@
  */
 package project;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -62,7 +64,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         CNIC = new javax.swing.JTextField();
         CNIC1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(370, 80, 0, 0));
         setResizable(false);
 
@@ -120,6 +122,11 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         jLabel14.setText("CNIC Number");
 
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("Phone Number");
 
@@ -325,6 +332,13 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CNICKeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        BasicActivity BA = new BasicActivity();
+        close();
+        BA.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -362,6 +376,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
          
        
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CNIC;
@@ -397,4 +412,12 @@ public class CreateAccountDetail extends javax.swing.JFrame {
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel nul;
     // End of variables declaration//GEN-END:variables
+
+  public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+
 }
