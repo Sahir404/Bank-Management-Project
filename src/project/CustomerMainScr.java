@@ -19,12 +19,12 @@ import javax.swing.JPanel;
  *
  * @author DeadTrigger
  */
-public class desh extends javax.swing.JFrame {
+public class CustomerMainScr extends javax.swing.JFrame {
 
     /**
      * Creates new form CreateAccount
      */
-    public desh() {
+    public CustomerMainScr() {
         initComponents();
       scaleImage3("Transfer Logo.png",ImageLBL);
       scaleImage3("Investment.png",Investment);
@@ -384,7 +384,7 @@ public class desh extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new desh().setVisible(true);
+                new CustomerMainScr().setVisible(true);
             }
         });
     }
