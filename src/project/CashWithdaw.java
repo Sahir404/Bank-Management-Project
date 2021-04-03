@@ -18,7 +18,37 @@ public class CashWithdaw extends javax.swing.JFrame {
     /**
      * Creates new form CashWithdaw
      */
+    Connection con=null;
+    Statement stmt=null;
     public CashWithdaw() {
+        ///
+        ///         Creating Connection with data base
+        ///
+     String driver="oracle.jdbc.driver.OracleDriver";
+     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+
+     String user="BankProject";
+   String pass="project";          
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+            System.out.println("Connetcting to Data base ");
+       
+
+        try {
+            this.con = DriverManager.getConnection(Url, user, pass);
+        } catch (SQLException ex) {
+             System.out.println(ex);
+        }
+        try {
+            this.stmt = this.con.createStatement();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+        
         initComponents();
     }
 

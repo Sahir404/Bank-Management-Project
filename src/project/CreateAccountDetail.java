@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -16,14 +18,42 @@ import java.sql.*;
  * @author DeadTrigger
  */
 public class CreateAccountDetail extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form CreateAccountDetail
      */
+    Connection con=null;
+    Statement stmt=null;
     public CreateAccountDetail() {
+        ///
+        ///         Creating Connection with data base
+        ///
+     String driver="oracle.jdbc.driver.OracleDriver";
+     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+
+     String user="BankProject";
+   String pass="project";          
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+            System.out.println("Connetcting to Data base ");
+       
+
+        try {
+            this.con = DriverManager.getConnection(Url, user, pass);
+        } catch (SQLException ex) {
+             System.out.println(ex);
+        }
+        try {
+            this.stmt = this.con.createStatement();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +65,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         nul = new javax.swing.JLabel();
-        nameTextField = new javax.swing.JTextField();
+        UserIdText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         fNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -51,7 +81,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         EmailTextfield = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        EmailTextfield1 = new javax.swing.JTextField();
+        EmailAddres = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         City = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -166,7 +196,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                                     .addGap(100, 100, 100)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(EmailTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(EmailTextfield1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(EmailAddres, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -212,7 +242,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                                         .addGap(100, 100, 100)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(fNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                                            .addComponent(nameTextField)
+                                            .addComponent(UserIdText)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(Male, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(29, 29, 29)
@@ -227,7 +257,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                 .addComponent(nul, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -265,7 +295,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                             .addComponent(EmailTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(EmailTextfield1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EmailAddres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -384,12 +414,13 @@ public class CreateAccountDetail extends javax.swing.JFrame {
     private javax.swing.JTextField CNIC;
     private javax.swing.JTextField CNIC1;
     private javax.swing.JTextField City;
+    private javax.swing.JTextField EmailAddres;
     private javax.swing.JTextField EmailTextfield;
-    private javax.swing.JTextField EmailTextfield1;
     private javax.swing.JRadioButton Female;
     private javax.swing.JRadioButton Male;
     private javax.swing.JTextField Province;
     private javax.swing.JTextField Province1;
+    private javax.swing.JTextField UserIdText;
     private javax.swing.JTextField fNameTextField;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -411,10 +442,14 @@ public class CreateAccountDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel nul;
     // End of variables declaration//GEN-END:variables
-
+    
+    public void setData(String Userid , String Email)
+    {
+        UserIdText.setText(Userid);
+        EmailAddres.setText(Email);
+    }
   public void close(){
  
  WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);

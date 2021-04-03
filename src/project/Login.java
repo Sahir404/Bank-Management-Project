@@ -8,9 +8,39 @@ import javax.swing.JOptionPane;
 
 
 public class Login extends javax.swing.JFrame {
-
+    
+    Connection con=null;
+    Statement stmt=null;
     
     public Login() {
+        
+        ///
+        ///         Creating Connection with data base
+        ///
+     String driver="oracle.jdbc.driver.OracleDriver";
+     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+
+     String user="BankProject";
+   String pass="project";          
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+            System.out.println("Connetcting to Data base ");
+       
+
+        try {
+            this.con = DriverManager.getConnection(Url, user, pass);
+        } catch (SQLException ex) {
+             System.out.println(ex);
+        }
+        try {
+            this.stmt = this.con.createStatement();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
         initComponents();
     }
     public void visibleCreateAccount(boolean j)
@@ -25,7 +55,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Name = new javax.swing.JTextField();
+        UserId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
         Login_btn = new javax.swing.JButton();
@@ -47,13 +77,13 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(60, 100, 50, 14);
 
-        Name.addActionListener(new java.awt.event.ActionListener() {
+        UserId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameActionPerformed(evt);
+                UserIdActionPerformed(evt);
             }
         });
-        getContentPane().add(Name);
-        Name.setBounds(140, 90, 210, 30);
+        getContentPane().add(UserId);
+        UserId.setBounds(140, 90, 210, 30);
 
         jLabel3.setText("Password");
         getContentPane().add(jLabel3);
@@ -68,8 +98,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Login_btn);
-        Login_btn.setBounds(190, 200, 90, 23);
+        Login_btn.setBounds(190, 240, 90, 23);
 
+        newaccount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         newaccount.setText("Create new account");
         newaccount.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -77,14 +108,14 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(newaccount);
-        newaccount.setBounds(190, 240, 160, 30);
+        newaccount.setBounds(170, 190, 160, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameActionPerformed
+    private void UserIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NameActionPerformed
+    }//GEN-LAST:event_UserIdActionPerformed
      String s;
     private void newaccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newaccountMouseClicked
         // TODO add your handling code here:                            
@@ -95,7 +126,7 @@ public class Login extends javax.swing.JFrame {
     
     private void Login_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_btnActionPerformed
         // TODO add your handling code here:
-        String name = Name.getText().toString();
+        String name = UserId.getText().toString();
             
         /*
         /*
@@ -104,26 +135,9 @@ public class Login extends javax.swing.JFrame {
         */
         if(getCheck()== "Manager")
         {
-            
-           
-             Connection con=null;
-        Statement stmt=null;
-          String driver="oracle.jdbc.driver.OracleDriver";
-     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
-
-     String user="BankProject";
-   String pass="project";
-           
-
         try {         
-            Class.forName(driver);
-            System.out.println("Connetcting to Data base ");
-            con = DriverManager.getConnection(Url, user, pass);
-            System.out.println("Creating data base...... ");
-          
-            stmt = con.createStatement();
-                         System.out.println("stmt done ");
-        String sql = "Select * from Manager where UserId  = '"+Name.getText().toString()+"' And Password = '"+Password.getText()+"'";                     
+           
+        String sql = "Select * from Manager where UserId  = '"+UserId.getText().toString()+"' And Password = '"+Password.getText()+"'";                     
 
                 ResultSet rs = stmt.executeQuery(sql);                
                      if( rs.next())
@@ -137,16 +151,9 @@ public class Login extends javax.swing.JFrame {
                         
                      }
                      else  JOptionPane.showMessageDialog(this, "Some thing went wrong");
-        }
-                     catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);                                       
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-            
-            
-            
+        }   catch (SQLException ex) {
+               System.out.println(ex);
+            }    
         }
         /*
         /*
@@ -159,27 +166,15 @@ public class Login extends javax.swing.JFrame {
         {
             
            
-            
-             Connection con=null;
-        Statement stmt=null;
-          String driver="oracle.jdbc.driver.OracleDriver";
-     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
-
-     String user="BankProject";
-   String pass="project";
            
+        String sql = "Select * from Customer where UserId  = '"+UserId.getText().toString()+"' And Password = '"+Password.getText()+"'";                     
 
-        try {         
-            Class.forName(driver);
-            System.out.println("Connetcting to Data base ");
-            con = DriverManager.getConnection(Url, user, pass);
-            System.out.println("Creating data base...... ");
-          
-            stmt = con.createStatement();
-                         System.out.println("stmt done ");
-        String sql = "Select * from Customer where UserId  = '"+Name.getText().toString()+"' And Password = '"+Password.getText()+"'";                     
-
-                ResultSet rs = stmt.executeQuery(sql);            
+                ResultSet rs;            
+            try {
+                rs = stmt.executeQuery(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 
                     // Loged in If Parameters are Corect 
                 
@@ -189,22 +184,18 @@ public class Login extends javax.swing.JFrame {
                             close();
                             
                           CustomerMainScr CMS = new CustomerMainScr();
-//                          CMS.setName(Name.getText().toString());           
+                          CMS.setName(UserId.getText().toString());           
                           CMS.setVisible(true);
                          
                         
                      }
                      else  JOptionPane.showMessageDialog(this, "Some thing went wrong");
         }
-                     catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);                                       
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                     
         
             
             
-        }
+        
         
         
         
@@ -249,8 +240,8 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login_btn;
-    private javax.swing.JTextField Name;
     private javax.swing.JPasswordField Password;
+    private javax.swing.JTextField UserId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

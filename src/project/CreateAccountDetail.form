@@ -47,7 +47,7 @@
                                   <EmptySpace min="100" pref="100" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="EmailTextfield" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
-                                      <Component id="EmailTextfield1" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
+                                      <Component id="EmailAddres" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
                                       <Component id="CNIC" alignment="0" min="-2" pref="302" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -106,7 +106,7 @@
                                       <EmptySpace min="100" pref="100" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="fNameTextField" alignment="0" pref="302" max="32767" attributes="0"/>
-                                          <Component id="nameTextField" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="UserIdText" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="Male" min="-2" pref="57" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -131,7 +131,7 @@
               <Component id="nul" min="-2" pref="24" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nameTextField" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="UserIdText" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -179,7 +179,7 @@
                       </Group>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="EmailTextfield1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="EmailAddres" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -224,7 +224,7 @@
         <Property name="text" type="java.lang.String" value="Additional Detail"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nameTextField">
+    <Component class="javax.swing.JTextField" name="UserIdText">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -445,7 +445,7 @@
         <Property name="text" type="java.lang.String" value="Address"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="EmailTextfield1">
+    <Component class="javax.swing.JTextField" name="EmailAddres">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>

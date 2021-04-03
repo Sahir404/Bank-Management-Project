@@ -4,6 +4,9 @@ package project;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,8 +17,42 @@ public class CreateAccount extends javax.swing.JFrame {
     /**
      * Creates new form CreateAccount
      */
+    
+    Connection con=null;
+    Statement stmt=null;
+    
     public CreateAccount() {
+        
+        ///
+        ///         Creating Connection with data base
+        ///
+     String driver="oracle.jdbc.driver.OracleDriver";
+     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+
+     String user="BankProject";
+   String pass="project";          
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+            System.out.println("Connetcting to Data base ");
+       
+
+        try {
+            this.con = DriverManager.getConnection(Url, user, pass);
+        } catch (SQLException ex) {
+             System.out.println(ex);
+        }
+        try {
+            this.stmt = this.con.createStatement();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
         initComponents();
+        
+        
+       
     }
 
     /**
@@ -29,13 +66,13 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        UserId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         ConfirmPass = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
+        ConfirmPassw = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        Emailtext = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -78,11 +115,13 @@ public class CreateAccount extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                            .addComponent(jTextField4)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(UserId)
+                            .addComponent(password)
+                            .addComponent(ConfirmPassw, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                            .addComponent(Emailtext)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -93,18 +132,18 @@ public class CreateAccount extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UserId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Emailtext, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmPassw, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ConfirmPass))
                 .addGap(30, 30, 30)
                 .addComponent(jButton1)
@@ -115,11 +154,45 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        CreateAccountDetail accountDetail = new CreateAccountDetail();
-        close();
-        accountDetail.setVisible(true);
+        Object pass = password.getText();
+        Object conf = ConfirmPassw.getText();
+
+        boolean mCheckpass = (pass.equals(conf));
+        try {
+            // TODO add your handling code here:
+            
+           
+            String sql = "Select * from Customer where UserId  = '"+UserId.getText().toString()+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if( rs.next())
+            {
+                JOptionPane.showMessageDialog(this, "User Id Name Already exist");
+            }
+            else  
+            {
+                if(mCheckpass){
+                         String sql1 = "Insert into Customer (UserId ,password,email)"+ " values( '"+UserId.getText()+"' , '  "+password.getText()+"' , '"+Emailtext.getText()+"' )";
+
+                         int a = stmt.executeUpdate(sql1);  
+                         if(a>0)
+                         {
+                              CreateAccountDetail accountDetail = new CreateAccountDetail();
+                                close();
+                                accountDetail.setData(UserId.getText() ,Emailtext.getText() );
+                                accountDetail.setVisible(true);
+                         }
+                        
+                       
+                }   else JOptionPane.showMessageDialog(this, "Confirmation Password is not same");
+                
+            }
+            
+            
+            
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -159,15 +232,15 @@ public class CreateAccount extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ConfirmPass;
+    private javax.swing.JPasswordField ConfirmPassw;
+    private javax.swing.JTextField Emailtext;
+    private javax.swing.JTextField UserId;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
 
       public void close(){
