@@ -5,6 +5,10 @@
  */
 package project;
 
+import java.awt.event.KeyEvent;
+import java.sql.*;
+
+
 /**
  *
  * @author DeadTrigger
@@ -42,7 +46,19 @@ public class CashWithdaw extends javax.swing.JFrame {
 
         jLabel2.setText("Number");
 
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Amount");
+
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
 
         jButton1.setText("Withdraw");
 
@@ -91,6 +107,32 @@ public class CashWithdaw extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+        if(!(Character.isDigit(c))  )
+        {
+            if((c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            }
+           evt.consume();
+            
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+        if(!(Character.isDigit(c))  )
+        {
+            if((c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_DELETE)){
+            getToolkit().beep();
+            }
+           evt.consume();
+            
+        }
+    }//GEN-LAST:event_jTextField3KeyTyped
 
     /**
      * @param args the command line arguments

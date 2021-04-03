@@ -3,6 +3,7 @@ package project;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.*;
 
 /**
  *
@@ -45,7 +46,7 @@ public class CreateAccount extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Elephant", 0, 18)); // NOI18N
         jLabel1.setText("Create Account");
 
-        jLabel2.setText("Name");
+        jLabel2.setText("User ID");
 
         jLabel3.setText("Password");
 
