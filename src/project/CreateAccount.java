@@ -171,7 +171,7 @@ public class CreateAccount extends javax.swing.JFrame {
             else  
             {
                 if(mCheckpass){
-                         String sql1 = "Insert into Customer (UserId ,password,email)"+ " values( '"+UserId.getText()+"' , '  "+password.getText()+"' , '"+Emailtext.getText()+"' )";
+                         String sql1 = "Insert into Customer (UserId ,password,email)"+ " values( '"+UserId.getText()+"' , '"+password.getText().trim()+"' , '"+Emailtext.getText()+"' )";
 
                          int a = stmt.executeUpdate(sql1);  
                          if(a>0)

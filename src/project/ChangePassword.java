@@ -4,48 +4,54 @@
  * and open the template in the editor.
  */
 package project;
-import java.sql.*;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author DeadTrigger
  */
 public class ChangePassword extends javax.swing.JFrame {
-    Connection con=null;
-    Statement stmt=null;
+
+    Connection con = null;
+    Statement stmt = null;
+
     /**
      * Creates new form ChangePassword
      */
     public ChangePassword() {
-        
+
         ///
         ///         Creating Connection with data base
         ///
-     String driver="oracle.jdbc.driver.OracleDriver";
-     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+        String driver = "oracle.jdbc.driver.OracleDriver";
+        String Url = "jdbc:oracle:thin:@localhost:1521:XE";
 
-     String user="BankProject";
-   String pass="project";          
+        String user = "BankProject";
+        String pass = "project";
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
-            System.out.println("Connetcting to Data base ");
-       
+        System.out.println("Connetcting to Data base ");
 
         try {
             this.con = DriverManager.getConnection(Url, user, pass);
         } catch (SQLException ex) {
-             System.out.println(ex);
+            System.out.println(ex);
         }
         try {
             this.stmt = this.con.createStatement();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+
         initComponents();
     }
 
@@ -59,11 +65,11 @@ public class ChangePassword extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        OldPass = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        NewPass = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        ConfPass = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,9 +101,9 @@ public class ChangePassword extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jPasswordField2)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                    .addComponent(OldPass)
+                    .addComponent(NewPass)
+                    .addComponent(ConfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                 .addContainerGap(115, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,15 +116,15 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(OldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ConfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jButton1)
                 .addContainerGap(94, Short.MAX_VALUE))
@@ -128,8 +134,34 @@ public class ChangePassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+        Object mNewPass = NewPass.getText();
+        Object mConfPass = ConfPass.getText();
+        boolean check = mNewPass.equals(mConfPass);
+        try {
+            // TODO add your handling code here:
+            String sql = "Select * from customer where UserId  = '" + getUserId() + "' And Password = '" + OldPass.getText() + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                if ( check ) {
+                    String sql1 = "Update customer Set password = '" + NewPass.getText() + "' where userid = '" + getUserId() + "'";
+                    int j = stmt.executeUpdate(sql);
+                    if (j > 0) {
+                        JOptionPane.showMessageDialog(this, "Password Changed");
+                        CustomerMainScr CMS = new CustomerMainScr();
+                        close();
+                    CMS.setName(getUserId());
+                        CMS.setVisible(true);
+                    }else JOptionPane.showMessageDialog(this, "Password did not Changed");
+                    
+                }else JOptionPane.showMessageDialog(this, "Both passwords are not Same");
+            } else {
+                JOptionPane.showMessageDialog(this, "Old Password Is Wrong");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -168,12 +200,28 @@ public class ChangePassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField ConfPass;
+    private javax.swing.JPasswordField NewPass;
+    private javax.swing.JPasswordField OldPass;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     // End of variables declaration//GEN-END:variables
+private String UserId;
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String UserId) {
+        this.UserId = UserId;
+    }
+    public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+
 }

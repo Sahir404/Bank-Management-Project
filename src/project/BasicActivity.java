@@ -41,7 +41,7 @@ public class BasicActivity extends javax.swing.JFrame  {
         Customer_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBounds(new java.awt.Rectangle(500, 200, 500, 300));
+        setBounds(new java.awt.Rectangle(400, 100, 500, 300));
         setMinimumSize(new java.awt.Dimension(600, 600));
         setResizable(false);
         getContentPane().setLayout(null);

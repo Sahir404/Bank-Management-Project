@@ -118,8 +118,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_UserIdActionPerformed
      String s;
     private void newaccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newaccountMouseClicked
-        // TODO add your handling code here:                            
+        // TODO add your handling code here:   
+          close();
         CreateAccount CA = new CreateAccount();
+       
         CA.setVisible(true);
         
     }//GEN-LAST:event_newaccountMouseClicked
@@ -165,31 +167,33 @@ public class Login extends javax.swing.JFrame {
         if(getCheck()== "Customer")
         {
             
+           System.out.println("This is Customer");
            
-           
-        String sql = "Select * from Customer where UserId  = '"+UserId.getText().toString()+"' And Password = '"+Password.getText()+"'";                     
-
-                ResultSet rs;            
             try {
-                rs = stmt.executeQuery(sql);
+                String sql = "Select * from customer where UserId  = '"+UserId.getText().toString()+"' And Password = '"+Password.getText()+"'";
+                
+                
+                
+                ResultSet rs = stmt.executeQuery(sql);
+                
+                
+                // Loged in If Parameters are Corect
+                
+                if( rs.next())
+                {
+                    JOptionPane.showMessageDialog(this, "You are loged in succesfully");
+                    close();
+                    
+                    CustomerMainScr CMS = new CustomerMainScr();
+                    CMS.setName(UserId.getText().toString());
+                    CMS.setVisible(true);
+                    
+                    
+                }
+                else  JOptionPane.showMessageDialog(this, "Some thing went wrong");
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
-                    // Loged in If Parameters are Corect 
-                
-                     if( rs.next())
-                     {      
-                         JOptionPane.showMessageDialog(this, "You are loged in succesfully");
-                            close();
-                            
-                          CustomerMainScr CMS = new CustomerMainScr();
-                          CMS.setName(UserId.getText().toString());           
-                          CMS.setVisible(true);
-                         
-                        
-                     }
-                     else  JOptionPane.showMessageDialog(this, "Some thing went wrong");
         }
                      
         
