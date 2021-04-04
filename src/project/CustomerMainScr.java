@@ -14,24 +14,60 @@ import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import java.sql.*;
+
 
 /**
  *
  * @author DeadTrigger
  */
 public class CustomerMainScr extends javax.swing.JFrame {
-
+     private String Name;
+   
+  
     /**
      * Creates new form CreateAccount
      */
+     Connection con=null;
+    Statement stmt=null;
+   
     public CustomerMainScr() {
+        ///
+        ///         Creating Connection with data base
+        ///
+     String driver="oracle.jdbc.driver.OracleDriver";
+     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+
+     String user="BankProject";
+   String pass="project";          
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+            System.out.println("Connetcting to Data base ");
+       
+
+        try {
+            this.con = DriverManager.getConnection(Url, user, pass);
+        } catch (SQLException ex) {
+             System.out.println(ex);
+        }
+        try {
+            this.stmt = this.con.createStatement();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+         
         initComponents();
+        
       scaleImage3("Transfer Logo.png",ImageLBL);
       scaleImage3("Investment.png",Investment);
       scaleImage3("Statement.png",Statement);
       scaleImage3("change Password 1 .png",Password);
       scaleImage3("logout.png",logout);
       scaleImage3("male.png",logo);
+      
     }
     
     
@@ -45,7 +81,6 @@ public class CustomerMainScr extends javax.swing.JFrame {
         lbl.setIcon(scaledIcon);
         
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,7 +109,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
         logout = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        Namelbl = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
 
@@ -93,6 +128,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(97, 96, 88));
         setBounds(new java.awt.Rectangle(400, 100, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         jPanel8.setBackground(new java.awt.Color(255, 113, 113));
@@ -253,10 +289,11 @@ public class CustomerMainScr extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("jLabel1");
-        jLabel1.setToolTipText("");
-        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        Namelbl.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        Namelbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        Namelbl.setText("jLabel1");
+        Namelbl.setToolTipText("");
+        Namelbl.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         jPanel6.setBackground(new java.awt.Color(200, 238, 217));
 
@@ -287,7 +324,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Namelbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(57, 57, 57)
@@ -308,7 +345,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
@@ -380,7 +417,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CustomerMainScr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -388,13 +425,20 @@ public class CustomerMainScr extends javax.swing.JFrame {
             }
         });
     }
+   
 
+    
+
+    public void setName(String Name) {
+        Namelbl.setText("Name : "+Name);
+    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImageLBL;
     private javax.swing.JLabel Investment;
+    private javax.swing.JLabel Namelbl;
     private javax.swing.JLabel Password;
     private javax.swing.JLabel Statement;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -412,7 +456,9 @@ public class CustomerMainScr extends javax.swing.JFrame {
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logout;
     // End of variables declaration//GEN-END:variables
-
+     
+    
+    
 class RoundedPanel extends JPanel
     {
         private Color backgroundColor;

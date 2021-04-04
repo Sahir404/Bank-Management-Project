@@ -72,14 +72,14 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        day = new javax.swing.JComboBox<>();
+        month = new javax.swing.JComboBox<>();
+        year = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         Male = new javax.swing.JRadioButton();
         Female = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
-        EmailTextfield = new javax.swing.JTextField();
+        Adress = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         EmailAddres = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -87,13 +87,13 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         Province = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        Province1 = new javax.swing.JTextField();
+        Occupation = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        Religion = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        SubmitBtn = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
-        CNIC = new javax.swing.JTextField();
+        PhoneNo = new javax.swing.JTextField();
         CNIC1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -115,11 +115,11 @@ public class CreateAccountDetail extends javax.swing.JFrame {
 
         jLabel6.setText("Year");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "Jully", "August", "September", "Octuber ", "November", "December" }));
+        month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "Jully", "August", "September", "Octuber ", "November", "December" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920" }));
+        year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920" }));
 
         jLabel7.setText("Gender");
 
@@ -149,22 +149,22 @@ public class CreateAccountDetail extends javax.swing.JFrame {
 
         jLabel13.setText("Religion");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Muslim", "Hindu", "Christian", "Budhist", "other" }));
+        Religion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Muslim", "Hindu", "Christian", "Budhist", "other" }));
 
         jLabel14.setText("CNIC Number");
 
-        jButton1.setText("Submit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        SubmitBtn.setText("Submit");
+        SubmitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SubmitBtnActionPerformed(evt);
             }
         });
 
         jLabel15.setText("Phone Number");
 
-        CNIC.addKeyListener(new java.awt.event.KeyAdapter() {
+        PhoneNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                CNICKeyTyped(evt);
+                PhoneNoKeyTyped(evt);
             }
         });
 
@@ -195,9 +195,9 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                                         .addComponent(jLabel9))
                                     .addGap(100, 100, 100)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(EmailTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Adress, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(EmailAddres, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(PhoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -215,9 +215,9 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                                             .addComponent(jLabel13)
                                             .addGap(132, 132, 132)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Province1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jButton1))
+                                        .addComponent(Occupation, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Religion, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(SubmitBtn))
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,15 +229,15 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(100, 100, 100)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -268,10 +268,10 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,13 +286,13 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(CNIC, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PhoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EmailTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Adress, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(EmailAddres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,14 +307,14 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Province1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Occupation, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Religion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(SubmitBtn)
                 .addGap(34, 34, 34))
         );
 
@@ -326,6 +326,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         if(Male.isSelected())
         {
             Female.setSelected(false);
+            gender = "male";
         }
     }//GEN-LAST:event_MaleActionPerformed
 
@@ -334,6 +335,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         if(Female.isSelected())
         {
             Male.setSelected(false);
+            gender = "female";
         }
     }//GEN-LAST:event_FemaleActionPerformed
 
@@ -351,7 +353,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
       
     }//GEN-LAST:event_CNIC1KeyTyped
 
-    private void CNICKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CNICKeyTyped
+    private void PhoneNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PhoneNoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
       if(!(Character.isDigit(c))  )
@@ -362,14 +364,49 @@ public class CreateAccountDetail extends javax.swing.JFrame {
            evt.consume();
             
         }
-    }//GEN-LAST:event_CNICKeyTyped
+    }//GEN-LAST:event_PhoneNoKeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        BasicActivity BA = new BasicActivity();
-        close();
-        BA.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            String mDay = day.getSelectedItem().toString();
+            String mMonth = month.getSelectedItem().toString();
+            String mYear = year.getSelectedItem().toString();
+            String FName = fNameTextField.getText();
+            String cnic = CNIC1.getText().toString();
+            String phoneno = PhoneNo.getText().toString();
+            String mAdress = Adress.getText().toString();
+            String mCity = City.getText().toString();
+            String mProvince = Province.getText().toString();
+            String mOccupation = Occupation.getText().toString();
+            String Date =" ' "+ mDay+"/"+mMonth+"/"+mYear+"'" ;
+            String mRelgion  = Religion.getSelectedItem().toString();
+            String userid = UserIdText.getText().toString();
+            String sql1 = "Update customer set " +
+"                    FATHER_NAME =  '"+FName+"'," +
+"                   DOB =  "+Date+"," +
+"                    CNIC_NO ='"+ cnic+"'," +
+"                   Gender ='"+gender+"'," +
+"                    PHONE_NO = '"+phoneno+"'," +
+"                    ADDRESS ='"+mAdress+"'," +
+"                   CITY = '"+mCity+"'," +
+"                    OCUPATION = '"+mOccupation+"'," +
+"                   RELIGION = '"+mRelgion+"'" +                  
+"                    where userid = 'Hyder'";
+            
+            
+            int a = stmt.executeUpdate(sql1);
+            if(a>0)
+            {
+                BasicActivity BA = new BasicActivity();
+                close();
+                BA.setVisible(true);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccountDetail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }//GEN-LAST:event_SubmitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,22 +448,20 @@ public class CreateAccountDetail extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CNIC;
+    private javax.swing.JTextField Adress;
     private javax.swing.JTextField CNIC1;
     private javax.swing.JTextField City;
     private javax.swing.JTextField EmailAddres;
-    private javax.swing.JTextField EmailTextfield;
     private javax.swing.JRadioButton Female;
     private javax.swing.JRadioButton Male;
+    private javax.swing.JTextField Occupation;
+    private javax.swing.JTextField PhoneNo;
     private javax.swing.JTextField Province;
-    private javax.swing.JTextField Province1;
+    private javax.swing.JComboBox<String> Religion;
+    private javax.swing.JButton SubmitBtn;
     private javax.swing.JTextField UserIdText;
+    private javax.swing.JComboBox<String> day;
     private javax.swing.JTextField fNameTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -442,9 +477,11 @@ public class CreateAccountDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox<String> month;
     private javax.swing.JLabel nul;
+    private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
-    
+    private String gender;
     public void setData(String Userid , String Email)
     {
         UserIdText.setText(Userid);
