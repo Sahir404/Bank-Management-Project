@@ -5,8 +5,13 @@
  */
 package project;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,15 +65,14 @@ public class DepositMoney extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        Amount = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        CustomerId = new javax.swing.JTextField();
+        deposit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setEnabled(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -76,9 +80,9 @@ public class DepositMoney extends javax.swing.JFrame {
             }
         });
 
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        Amount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                AmountKeyTyped(evt);
             }
         });
 
@@ -86,7 +90,12 @@ public class DepositMoney extends javax.swing.JFrame {
 
         jLabel3.setText("Amount");
 
-        jButton1.setText("Deposit");
+        deposit.setText("Deposit");
+        deposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depositActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("User Id");
 
@@ -97,7 +106,7 @@ public class DepositMoney extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(deposit)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
@@ -106,11 +115,11 @@ public class DepositMoney extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Amount, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField1))))
+                            .addComponent(CustomerId))))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,17 +128,17 @@ public class DepositMoney extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(deposit)
                 .addContainerGap(100, Short.MAX_VALUE))
         );
 
@@ -149,7 +158,7 @@ public class DepositMoney extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField2KeyTyped
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+    private void AmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmountKeyTyped
         // TODO add your handling code here:
           char c = evt.getKeyChar();
         if(!(Character.isDigit(c))  )
@@ -160,7 +169,33 @@ public class DepositMoney extends javax.swing.JFrame {
            evt.consume();
             
         }
-    }//GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_AmountKeyTyped
+
+    private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
+        try {
+            // TODO add your handling code here:
+            String sql1 = "Update customer Set Balance = Balance -" +Amount.getText()+ " where userid = '" + CustomerId.getText() + "'";
+            
+            int j = stmt.executeUpdate(sql1);
+            if (j > 0) {
+                
+                String sql3 = "Insert into MONEYTRANSDETAIL (Sender ,RECIEVER,AMOUNT) values( 'Bank' ,'"+CustomerId.getText()+"' ,  "+Amount.getText().toString()+" )";
+
+                         int a = stmt.executeUpdate(sql3);  
+                         if(a>0)
+                         {
+                             JOptionPane.showMessageDialog(this, "Cash Withdrawn");
+                              close();
+                ManagerMainScreen MMS = new ManagerMainScreen();
+                 MMS.setName(getName());
+                 
+                MMS.setVisible(true);  
+                         }else JOptionPane.showMessageDialog(this, "Problem in Money MONEYTANSDETAIL");       
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DepositMoney.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_depositActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,12 +233,29 @@ public class DepositMoney extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField Amount;
+    private javax.swing.JTextField CustomerId;
+    private javax.swing.JButton deposit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+    public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+    private String Name;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
 }

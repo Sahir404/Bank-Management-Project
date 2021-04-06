@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -372,7 +373,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
             String mDay = day.getSelectedItem().toString();
             String mMonth = month.getSelectedItem().toString();
             String mYear = year.getSelectedItem().toString();
-            String FName = fNameTextField.getText();
+            String FName = fNameTextField.getText().toString();
             String cnic = CNIC1.getText().toString();
             String phoneno = PhoneNo.getText().toString();
             String mAdress = Adress.getText().toString();
@@ -387,12 +388,12 @@ public class CreateAccountDetail extends javax.swing.JFrame {
 "                   DOB =  "+Date+"," +
 "                    CNIC_NO ='"+ cnic+"'," +
 "                   Gender ='"+gender+"'," +
-"                    PHONE_NO = '"+phoneno+"'," +
+"                    PHONE_NO = "+phoneno+"," +
 "                    ADDRESS ='"+mAdress+"'," +
 "                   CITY = '"+mCity+"'," +
 "                    OCUPATION = '"+mOccupation+"'," +
 "                   RELIGION = '"+mRelgion+"'" +                  
-"                    where userid = 'Hyder'";
+"                    where userid = '"+userid+"'";
             
             
             int a = stmt.executeUpdate(sql1);
@@ -401,7 +402,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
                 BasicActivity BA = new BasicActivity();
                 close();
                 BA.setVisible(true);
-            }
+            }else JOptionPane.showMessageDialog(this, "Form Not Submited");
         } catch (SQLException ex) {
             Logger.getLogger(CreateAccountDetail.class.getName()).log(Level.SEVERE, null, ex);
         }

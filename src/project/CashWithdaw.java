@@ -5,8 +5,13 @@
  */
 package project;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -62,15 +67,15 @@ public class CashWithdaw extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        CustomerId = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        Amount = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setEnabled(false);
+        setBounds(new java.awt.Rectangle(400, 100, 0, 0));
 
         jLabel1.setText("User Id");
 
@@ -84,13 +89,18 @@ public class CashWithdaw extends javax.swing.JFrame {
 
         jLabel3.setText("Amount");
 
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        Amount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                AmountKeyTyped(evt);
             }
         });
 
         jButton1.setText("Withdraw");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,11 +118,11 @@ public class CashWithdaw extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Amount, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField1))))
+                            .addComponent(CustomerId))))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,14 +131,14 @@ public class CashWithdaw extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -151,7 +161,7 @@ public class CashWithdaw extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField2KeyTyped
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+    private void AmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmountKeyTyped
         // TODO add your handling code here:
           char c = evt.getKeyChar();
         if(!(Character.isDigit(c))  )
@@ -162,7 +172,40 @@ public class CashWithdaw extends javax.swing.JFrame {
            evt.consume();
             
         }
-    }//GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_AmountKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            String sql = "Select * from customer where UserId  = '" + CustomerId.getText().toString() + "' And Balance >" +Amount.getText().toString();
+            ResultSet rs = stmt.executeQuery(sql);
+            jTextField2.setText(Amount.getText().toString());
+            if (rs.next()) {
+            String sql1 = "Update customer Set Balance = Balance -" +Amount.getText()+ " where userid = '" + CustomerId.getText() + "'";
+            
+            int j = stmt.executeUpdate(sql1);
+            if (j > 0) {
+                 String sql3 = "Insert into MONEYTRANSDETAIL (Sender ,RECIEVER,AMOUNT) values( '"+CustomerId.getText()+"' , 'Bank' , "+Amount.getText().toString()+" )";
+
+                         int a = stmt.executeUpdate(sql3);  
+                         if(a>0)
+                         {
+                             JOptionPane.showMessageDialog(this, "Cash Withdrawn");
+                               close();
+                        ManagerMainScreen MMS = new ManagerMainScreen();
+                   
+                     MMS.setName(getName());
+                 
+                MMS.setVisible(true);  
+                         }else JOptionPane.showMessageDialog(this, "Problem in Money MONEYTANSDETAIL");
+                          
+            }
+            }else JOptionPane.showMessageDialog(this, "Amount is Greater than balance");
+        } catch (SQLException ex) {
+            Logger.getLogger(CashWithdaw.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,12 +243,31 @@ public class CashWithdaw extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Amount;
+    private javax.swing.JTextField CustomerId;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+    private String Name;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+    
+
+
 }
