@@ -17,6 +17,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -25,6 +27,7 @@ import java.sql.*;
  */
 public class CustomerMainScr extends javax.swing.JFrame {
      private String Name;
+      private String UserID;
    
   
     /**
@@ -34,42 +37,50 @@ public class CustomerMainScr extends javax.swing.JFrame {
     Statement stmt=null;
    
     public CustomerMainScr() {
-        ///
-        ///         Creating Connection with data base
-        ///
-     String driver="oracle.jdbc.driver.OracleDriver";
-     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
-
-     String user="BankProject";
-   String pass="project";          
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
-        }
-            System.out.println("Connetcting to Data base ");
-       
-
-        try {
-            this.con = DriverManager.getConnection(Url, user, pass);
-        } catch (SQLException ex) {
-             System.out.println(ex);
-        }
-        try {
-            this.stmt = this.con.createStatement();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-         
-        initComponents();
         
-      scaleImage3("Transfer Logo.png",ImageLBL);
-      scaleImage3("Investment.png",Investment);
-      scaleImage3("Statement.png",Statement);
-      scaleImage3("change Password 1 .png",Password);
-      scaleImage3("logout.png",logout);
-      scaleImage3("male.png",logo);
-      
+            ///
+            ///         Creating Connection with data base
+            ///
+            String driver="oracle.jdbc.driver.OracleDriver";
+            String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+            String user="BankProject";
+            String pass="project";
+            try {
+                Class.forName(driver);
+            } catch (ClassNotFoundException ex) {
+                System.out.println(ex);
+            }
+            System.out.println("Connetcting to Data base ");
+            try {
+                this.con = DriverManager.getConnection(Url, user, pass);
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            try {
+                this.stmt = this.con.createStatement();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            
+           
+           
+            
+            initComponents();
+             
+            String s =UserID;
+             
+                scaleImage3("Transfer Logo.png",ImageLBL);
+                scaleImage3("Investment.png",Investment);
+                scaleImage3("Statement.png",Statement);
+                scaleImage3("change Password 1 .png",Password);
+                scaleImage3("logout.png",logout);
+                 scaleImage3("male.png",logo);
+                
+//               change();
+        
+                
+           
+        
     }
     
     
@@ -82,6 +93,28 @@ public class CustomerMainScr extends javax.swing.JFrame {
         ImageIcon scaledIcon = new ImageIcon(imgscale);
         lbl.setIcon(scaledIcon);
         
+    }
+    public void change()
+    {
+         try {
+             String sql = "Select * from Customer where UserId ='"+UserID+"'";
+             ResultSet rs = stmt.executeQuery(sql);
+             
+             if (rs.next())
+             {
+                 Object mGender = (String)rs.getString("GENDER").toString();
+                 
+                 if(mGender.equals("male") )
+                 {
+                     scaleImage3("male.png",logo);
+                 } else if(mGender.equals("female"))
+                 {
+                     scaleImage3("Female Profile.png",logo);
+                 }
+             }else System.out.println("Logo not applied");
+         } catch (SQLException ex) {
+             Logger.getLogger(CustomerMainScr.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
     
     /**
@@ -112,7 +145,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Namelbl = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        Info = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -136,6 +169,11 @@ public class CustomerMainScr extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(255, 113, 113));
 
         Transfer_money.setBackground(new java.awt.Color(255, 113, 113));
+        Transfer_money.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Transfer_moneyMouseClicked(evt);
+            }
+        });
 
         ImageLBL.setBackground(new java.awt.Color(255, 255, 153));
         ImageLBL.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -205,6 +243,11 @@ public class CustomerMainScr extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 113, 113));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("Statement");
@@ -307,22 +350,32 @@ public class CustomerMainScr extends javax.swing.JFrame {
         Namelbl.setToolTipText("");
         Namelbl.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        jPanel6.setBackground(new java.awt.Color(200, 238, 217));
+        Info.setBackground(new java.awt.Color(200, 238, 217));
+        Info.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InfoMouseClicked(evt);
+            }
+        });
 
         logo.setBackground(new java.awt.Color(27, 32, 33));
+        logo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout InfoLayout = new javax.swing.GroupLayout(Info);
+        Info.setLayout(InfoLayout);
+        InfoLayout.setHorizontalGroup(
+            InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InfoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        InfoLayout.setVerticalGroup(
+            InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InfoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -344,7 +397,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ChangPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(252, 252, 252)
@@ -362,7 +415,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(136, 136, 136)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Transfer_money, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -395,7 +448,9 @@ public class CustomerMainScr extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
          TransferScr ts = new TransferScr();
-        ts.setVisible(true);
+         close();
+         ts.setUserId(UserID);
+         ts.setVisible(true);
         
     }//GEN-LAST:event_jLabel4MouseClicked
 
@@ -418,6 +473,41 @@ public class CustomerMainScr extends javax.swing.JFrame {
         mchangePass.setVisible(true);
         
     }//GEN-LAST:event_ChangPassMouseClicked
+
+    private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
+        // TODO add your handling code here:
+        Information info = new Information();
+        close();
+        info.setUserId(UserID);
+        info.setVisible(true);
+    }//GEN-LAST:event_logoMouseClicked
+
+    private void InfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InfoMouseClicked
+        // TODO add your handling code here:
+        
+        Information info = new Information();
+        close();
+        info.setUserId(UserID);
+        info.setVisible(true);
+        
+    }//GEN-LAST:event_InfoMouseClicked
+
+    private void Transfer_moneyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Transfer_moneyMouseClicked
+        // TODO add your handling code here:
+        TransferScr ts = new TransferScr();
+         close();
+         ts.setUserId(UserID);
+         ts.setVisible(true);
+    }//GEN-LAST:event_Transfer_moneyMouseClicked
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        // TODO add your handling code here:
+        CustomerStatement  stmt = new CustomerStatement();
+           close();
+        stmt.setUserId(UserID);
+        stmt.setVisible(true);
+        
+    }//GEN-LAST:event_jPanel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -455,7 +545,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
     }
    
 
-    public String UserID;
+   
 
     public void setName(String Name) {
         Namelbl.setText("Name : "+Name);
@@ -465,6 +555,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ChangPass;
     private javax.swing.JLabel ImageLBL;
+    private javax.swing.JPanel Info;
     private javax.swing.JLabel Investment;
     private javax.swing.JPanel Logout;
     private javax.swing.JLabel Namelbl;
@@ -479,7 +570,6 @@ public class CustomerMainScr extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JLabel logo;

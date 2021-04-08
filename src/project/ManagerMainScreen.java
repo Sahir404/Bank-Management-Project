@@ -103,10 +103,15 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(400, 100, 0, 0));
 
         Jpanel1.setBackground(new java.awt.Color(255, 214, 107));
+        Jpanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Jpanel1MouseClicked(evt);
+            }
+        });
 
         customer.setBackground(new java.awt.Color(255, 255, 204));
         customer.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -398,9 +403,9 @@ public class ManagerMainScreen extends javax.swing.JFrame {
 
     private void WithdrawMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WithdrawMouseClicked
         // TODO add your handling code here:
+         close();
         CashWithdaw CW = new CashWithdaw();
         CW.setName(Name1);
-        close();
         CW.setVisible(true);
         
     }//GEN-LAST:event_WithdrawMouseClicked
@@ -417,6 +422,13 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void Jpanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jpanel1MouseClicked
+        // TODO add your handling code here:
+        CustomerInfo CI = new CustomerInfo();
+        close();
+        CI.setVisible(true);
+    }//GEN-LAST:event_Jpanel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -488,4 +500,5 @@ public void close(){
         managername.setText("Manager : "+Name);
         Name1 = Name;
     }
+       
 }

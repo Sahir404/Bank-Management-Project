@@ -72,7 +72,7 @@ public class ChangePassword extends javax.swing.JFrame {
         ConfPass = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 200, 0, 0));
         setResizable(false);
 
@@ -144,8 +144,8 @@ public class ChangePassword extends javax.swing.JFrame {
 
             if (rs.next()) {
                 if ( check ) {
-                    String sql1 = "Update customer Set password = '" + NewPass.getText() + "' where userid = '" + getUserId() + "'";
-                    int j = stmt.executeUpdate(sql);
+                    String sql1 = "Update customer Set PASSWORD = '" + NewPass.getText() + "' where userid = '" + getUserId() + "'";
+                    int j = stmt.executeUpdate(sql1);
                     if (j > 0) {
                         JOptionPane.showMessageDialog(this, "Password Changed");
                         CustomerMainScr CMS = new CustomerMainScr();

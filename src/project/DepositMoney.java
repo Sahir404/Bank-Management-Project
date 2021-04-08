@@ -73,6 +73,7 @@ public class DepositMoney extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(400, 100, 0, 0));
 
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -174,7 +175,7 @@ public class DepositMoney extends javax.swing.JFrame {
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
         try {
             // TODO add your handling code here:
-            String sql1 = "Update customer Set Balance = Balance -" +Amount.getText()+ " where userid = '" + CustomerId.getText() + "'";
+            String sql1 = "Update customer Set Balance = Balance +" +Amount.getText()+ " where userid = '" + CustomerId.getText() + "'";
             
             int j = stmt.executeUpdate(sql1);
             if (j > 0) {

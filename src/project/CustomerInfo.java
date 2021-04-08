@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 package project;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 
 /**
@@ -73,7 +76,7 @@ public class CustomerInfo extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "UserId", "Balance", "CNIC", "Subscribe Scheme"
@@ -148,7 +151,15 @@ public class CustomerInfo extends javax.swing.JFrame {
 
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
         // TODO add your handling code here:
-        Information info =  new Information();
+        int i = jTable1.getSelectedRow();
+        TableModel model = jTable1.getModel();
+        
+        String UserId =""+model.getValueAt(i, 0).toString();
+        System.out.println(UserId);
+        Information info = new Information();
+        close();
+        info.setUserId(UserId);
+        info.setCheck(true);
         info.setVisible(true);
     }//GEN-LAST:event_OpenActionPerformed
 
@@ -221,4 +232,11 @@ public class CustomerInfo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+
 }

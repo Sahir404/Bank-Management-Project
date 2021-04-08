@@ -1,4 +1,5 @@
 package project;
+
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.*;
@@ -6,49 +7,47 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class Login extends javax.swing.JFrame {
-    
-    Connection con=null;
-    Statement stmt=null;
-    
+
+    Connection con = null;
+    Statement stmt = null;
+
     public Login() {
-        
+
         ///
         ///         Creating Connection with data base
         ///
-     String driver="oracle.jdbc.driver.OracleDriver";
-     String Url= "jdbc:oracle:thin:@localhost:1521:XE";
+        String driver = "oracle.jdbc.driver.OracleDriver";
+        String Url = "jdbc:oracle:thin:@localhost:1521:XE";
 
-     String user="BankProject";
-   String pass="project";          
+        String user = "BankProject";
+        String pass = "project";
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
-            System.out.println("Connetcting to Data base ");
-       
+        System.out.println("Connetcting to Data base ");
 
         try {
             this.con = DriverManager.getConnection(Url, user, pass);
         } catch (SQLException ex) {
-             System.out.println(ex);
+            System.out.println(ex);
         }
         try {
             this.stmt = this.con.createStatement();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+
         initComponents();
     }
-    public void visibleCreateAccount(boolean j)
-    {
+
+    public void visibleCreateAccount(boolean j) {
         newaccount.setVisible(j);
     }
-     String check; 
-    
+    String check;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,95 +115,79 @@ public class Login extends javax.swing.JFrame {
     private void UserIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UserIdActionPerformed
-     String s;
+    String s;
     private void newaccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newaccountMouseClicked
         // TODO add your handling code here:   
-          close();
+        close();
         CreateAccount CA = new CreateAccount();
-       
+
         CA.setVisible(true);
-        
+
     }//GEN-LAST:event_newaccountMouseClicked
-    
+
     private void Login_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_btnActionPerformed
         // TODO add your handling code here:
         String name = UserId.getText().toString();
-            
+
         /*
         /*
         /*      Manager Activity
         /*
-        */
-        if(getCheck()== "Manager")
-        {
-        try {         
-           
-        String sql = "Select * from Manager where UserId  = '"+UserId.getText().toString()+"' And Password = '"+Password.getText()+"'";                     
+         */
+        if (getCheck() == "Manager") {
+            try {
 
-                ResultSet rs = stmt.executeQuery(sql);                
-                     if( rs.next())
-                     {
-                         JOptionPane.showMessageDialog(this, "You are loged in succesfully");
-                         close();
-                         
-                          ManagerMainScreen mms = new ManagerMainScreen();
-                          
-                            mms.setVisible(true);
-                        
-                     }
-                     else  JOptionPane.showMessageDialog(this, "Some thing went wrong");
-        }   catch (SQLException ex) {
-               System.out.println(ex);
-            }    
+                String sql = "Select * from manager where MANAGER_ID  = '" + UserId.getText().toString() + "' And PASWORD = '" + Password.getText() + "'";
+
+                ResultSet rs = stmt.executeQuery(sql);
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "You are loged in succesfully");
+                    
+
+                    ManagerMainScreen mms = new ManagerMainScreen();
+                       close();
+                    mms.setVisible(true);
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Some thing went wrong");
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
         }
         /*
         /*
         /*      Customer Activity
         /*
-        */
-        
-        
-        if(getCheck()== "Customer")
-        {
-            
-           System.out.println("This is Customer");
-           
+         */
+
+        if (getCheck() == "Customer") {
+
+            System.out.println("This is Customer");
+
             try {
-                String sql = "Select * from customer where UserId  = '"+UserId.getText().toString()+"' And Password = '"+Password.getText()+"'";
-                
-                
-                
+                String sql = "Select * from customer where UserId  = '" + UserId.getText().toString() + "' And Password = '" + Password.getText() + "'";
+
                 ResultSet rs = stmt.executeQuery(sql);
-                
-                
+
                 // Loged in If Parameters are Corect
-                
-                if( rs.next())
-                {
+                if (rs.next()) {
                     JOptionPane.showMessageDialog(this, "You are loged in succesfully");
                     close();
-                    
+
                     CustomerMainScr CMS = new CustomerMainScr();
                     CMS.setName(UserId.getText().toString());
                     CMS.setVisible(true);
-                    
-                    
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Some thing went wrong");
                 }
-                else  JOptionPane.showMessageDialog(this, "Some thing went wrong");
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-                     
-        
-            
-            
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_Login_btnActionPerformed
 
     /**
@@ -252,19 +235,19 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel newaccount;
     // End of variables declaration//GEN-END:variables
 
- public String getCheck() {
+    public String getCheck() {
         return check;
     }
 
     public void setCheck(String check) {
         this.check = check;
     }
-    
-    public void close(){
- 
- WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
- Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
- 
- }
+
+    public void close() {
+
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+
+    }
 
 }

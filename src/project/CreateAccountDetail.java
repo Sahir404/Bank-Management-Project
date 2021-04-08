@@ -392,6 +392,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
 "                    ADDRESS ='"+mAdress+"'," +
 "                   CITY = '"+mCity+"'," +
 "                    OCUPATION = '"+mOccupation+"'," +
+"                    PROVINCE = '"+mProvince+"'," +
 "                   RELIGION = '"+mRelgion+"'" +                  
 "                    where userid = '"+userid+"'";
             

@@ -5,8 +5,12 @@
  */
 package project;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,14 +66,15 @@ public class TransferScr extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        RecieverID = new javax.swing.JTextField();
+        Amount = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        Password = new javax.swing.JPasswordField();
+        BackBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 200, 0, 0));
         setResizable(false);
 
@@ -86,6 +91,13 @@ public class TransferScr extends javax.swing.JFrame {
             }
         });
 
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,14 +110,16 @@ public class TransferScr extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(RecieverID, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(Amount, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(Password))
                 .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
+                .addComponent(BackBtn)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,18 +127,20 @@ public class TransferScr extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RecieverID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(jButton1)
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(BackBtn))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,10 +148,61 @@ public class TransferScr extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
        int response =  JOptionPane.showConfirmDialog(this,"Do you want to Transfer Money" ,"Confirm" , JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE );
         if(response == JOptionPane.YES_OPTION)
         {
             //iF Yes Option Is clicked 
+            
+            
+            String Reciever  = RecieverID.getText().toString();
+            String mAmount =Amount.getText().toString();
+
+             try {
+                 
+                 
+                 String sql2 = "Select * from customer where UserId  = '" + Reciever + "'";             // Checking Reciver Exists
+                 ResultSet rs1 = stmt.executeQuery(sql2);
+           if(rs1.next()){  
+               
+               
+            String sql = "Select * from customer where UserId  = '" + getUserId() + "' And Balance >" +Amount.getText().toString()+ " And Password ='" +Password.getText()+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            if (rs.next()) {                                            // Checking password and User Id is correct and Amount is Less then Balance
+            String sql1 = "Update customer Set Balance = Balance -" +Amount.getText()+ " where userid = '" + getUserId() + "'";
+            
+            int j = stmt.executeUpdate(sql1);
+            String sql4 = "Update customer Set Balance = Balance +" +Amount.getText()+ " where userid = '" + Reciever + "'";
+            
+            int i = stmt.executeUpdate(sql4);
+            
+            
+            if (j > 0 && i>0) {
+                 String sql3 = "Insert into MONEYTRANSDETAIL (Sender ,RECIEVER,AMOUNT) values( '" + getUserId() + "' , '"+Reciever+"' , "+Amount.getText().toString()+" )";
+
+                         int a = stmt.executeUpdate(sql3);  
+                         if(a>0)
+                         {
+                             JOptionPane.showMessageDialog(this, "Cash Sent");
+                               
+                    close();
+
+                    CustomerMainScr CMS = new CustomerMainScr();
+                    CMS.setName(getUserId());
+                    CMS.setVisible(true);
+
+                         }else JOptionPane.showMessageDialog(this, "Problem in Money MONEYTANSDETAIL");
+                          
+            }
+            
+            }else JOptionPane.showMessageDialog(this, "Amount is Greater than balance");
+            
+            
+           }    else JOptionPane.showMessageDialog(this, "User Does not Exists");
+        } catch (SQLException ex) {
+            Logger.getLogger(TransferScr.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
         if(response == JOptionPane.NO_OPTION)
         {
@@ -143,6 +210,15 @@ public class TransferScr extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+        close();
+
+        CustomerMainScr CMS = new CustomerMainScr();
+        CMS.setName(getUserId());
+        CMS.setVisible(true);
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,12 +256,32 @@ public class TransferScr extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Amount;
+    private javax.swing.JButton BackBtn;
+    private javax.swing.JPasswordField Password;
+    private javax.swing.JTextField RecieverID;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+private String UserId;
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String UserId) {
+        this.UserId = UserId;
+        
+        
+    }
+     public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+
 }
