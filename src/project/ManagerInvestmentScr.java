@@ -5,30 +5,31 @@
  */
 package project;
 
-import java.lang.System.Logger;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.*;
-import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author DeadTrigger
  */
-public class Transactions extends javax.swing.JFrame {
+public class ManagerInvestmentScr extends javax.swing.JFrame {
     Connection con=null;
     Statement stmt=null;
+    
+
     /**
-     * Creates new form Transactions
+     * Creates new form ManagerInvestmentScr
      */
-    public Transactions() {
-          ///
-        ///         Creating Connection with data base
-        ///
-     String driver="oracle.jdbc.driver.OracleDriver";
+    public ManagerInvestmentScr() {
+        
+        String driver="oracle.jdbc.driver.OracleDriver";
      String Url= "jdbc:oracle:thin:@localhost:1521:XE";
 
      String user="BankProject";
@@ -51,6 +52,7 @@ public class Transactions extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+     
         
         
         initComponents();
@@ -65,52 +67,45 @@ public class Transactions extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TableNo = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        pdfconvert = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        mTable = new javax.swing.JTable();
+        delete = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(400, 100, 0, 0));
 
-        TableNo.setModel(new javax.swing.table.DefaultTableModel(
+        mTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Sender", "Reciever", "Amount", "Date"
+                "Scheme Name", "Investing Amount", "Profit amount", "Days"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TableNo);
-        if (TableNo.getColumnModel().getColumnCount() > 0) {
-            TableNo.getColumnModel().getColumn(0).setResizable(false);
-            TableNo.getColumnModel().getColumn(0).setPreferredWidth(5);
-            TableNo.getColumnModel().getColumn(1).setResizable(false);
-            TableNo.getColumnModel().getColumn(1).setPreferredWidth(2);
-            TableNo.getColumnModel().getColumn(2).setResizable(false);
-            TableNo.getColumnModel().getColumn(2).setPreferredWidth(2);
-            TableNo.getColumnModel().getColumn(3).setPreferredWidth(50);
-        }
+        jScrollPane4.setViewportView(mTable);
 
-        jButton1.setText("Show data");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                deleteActionPerformed(evt);
             }
         });
 
-        pdfconvert.setText("Convert into pdf");
-        pdfconvert.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pdfconvertActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -121,61 +116,72 @@ public class Transactions extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Show Data");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(pdfconvert)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(56, 56, 56))
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(delete)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(pdfconvert)
+                    .addComponent(delete)
+                    .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     int count = 0;
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-         try {
+        try {
             // TODO add your handling code here:
-
-            String sql = "Select SENDER , RECIEVER , AMOUNT , TO_CHAR(TRANS_DATE,'dd/mm/yyyy , hh:Mi:ss') as Datae  from MONEYTRANSDETAIL";
+             DefaultTableModel tblModel = null;
+            
+            String sql = "Select * from INVESTMENT";
             ResultSet rs = stmt.executeQuery(sql);
                 if(count == 0){
             while(rs.next())
             {
-                String sender = rs.getString("SENDER");
-                String Reciever  = rs.getString("RECIEVER");
-                int Amount = rs.getInt("AMOUNT");
-                String date = rs.getString("Datae");
+                System.out.println("add Table");
+                String mSchemeName = rs.getString("SCHEME_NAME");
+                int mInvestAmount  = rs.getInt("INVEST_AMOUNT");
+                int mPrfitAmount = rs.getInt("PROFIT_AMOUNT");
+                int mDays = rs.getInt("DAYS");
                 
 //                SimpleDateFormat dateFormat = new SimpleDateFormat("mm//dd/yyyy , HH:MM:SS , a");
 //                String mDate = dateFormat.format(date);
                 
-                Object Row[] = {sender,Reciever,Amount,date};
-                
-                DefaultTableModel tblModel = (DefaultTableModel)TableNo.getModel();
+                Object Row[] = {mSchemeName,mInvestAmount,mPrfitAmount,mDays};
+                 tblModel = (DefaultTableModel)mTable.getModel();
+               
                 
                 tblModel.addRow(Row);
                 
@@ -189,12 +195,36 @@ public class Transactions extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void pdfconvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfconvertActionPerformed
-        // TODO add your handling code here:
         
-    }//GEN-LAST:event_pdfconvertActionPerformed
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        try {
+            // TODO add your handling code here:
+            int i = mTable.getSelectedRow();
+            TableModel model = mTable.getModel();
+            
+            String SchemeName =""+model.getValueAt(i, 0).toString();
+            
+            String sql = "DELETE from investment where scheme_name = '"+SchemeName+"' ";
+            int j = stmt.executeUpdate(sql);
+            if(j>0)
+            {
+                JOptionPane.showMessageDialog(this, "Scheme Deleted");
+            }
+            System.out.println(SchemeName);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManagerInvestmentScr.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        AddScheme AS = new AddScheme();
+        close();
+        AS.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -220,29 +250,37 @@ public class Transactions extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerInvestmentScr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerInvestmentScr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerInvestmentScr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Transactions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerInvestmentScr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Transactions().setVisible(true);
+                new ManagerInvestmentScr().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TableNo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton delete;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton pdfconvert;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable mTable;
     // End of variables declaration//GEN-END:variables
+public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+
 }

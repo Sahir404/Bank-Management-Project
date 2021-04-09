@@ -5,8 +5,13 @@
  */
 package project;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
  
 /**
@@ -64,16 +69,16 @@ public class AddScheme extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        SchemeName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        InvestAmount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        Profit = new javax.swing.JTextField();
+        days = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 200, 0, 0));
         setResizable(false);
 
@@ -81,32 +86,37 @@ public class AddScheme extends javax.swing.JFrame {
 
         jLabel2.setText("Investing Amount");
 
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+        InvestAmount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField2KeyPressed(evt);
+                InvestAmountKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField2KeyTyped(evt);
+                InvestAmountKeyTyped(evt);
             }
         });
 
         jLabel3.setText("Profit");
 
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        Profit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                ProfitKeyTyped(evt);
             }
         });
 
-        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+        days.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField4KeyTyped(evt);
+                daysKeyTyped(evt);
             }
         });
 
         jLabel4.setText("Days");
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,10 +131,10 @@ public class AddScheme extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3))
+                    .addComponent(days, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                    .addComponent(SchemeName)
+                    .addComponent(InvestAmount)
+                    .addComponent(Profit))
                 .addContainerGap(110, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -137,18 +147,18 @@ public class AddScheme extends javax.swing.JFrame {
                 .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SchemeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(InvestAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Profit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -158,12 +168,12 @@ public class AddScheme extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
+    private void InvestAmountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InvestAmountKeyPressed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jTextField2KeyPressed
+    }//GEN-LAST:event_InvestAmountKeyPressed
 
-    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+    private void InvestAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InvestAmountKeyTyped
         // TODO add your handling code here:
          char c = evt.getKeyChar();
         if(!(Character.isDigit(c))  )
@@ -174,9 +184,9 @@ public class AddScheme extends javax.swing.JFrame {
            evt.consume();
             
         }
-    }//GEN-LAST:event_jTextField2KeyTyped
+    }//GEN-LAST:event_InvestAmountKeyTyped
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+    private void ProfitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ProfitKeyTyped
         // TODO add your handling code here:
           char c = evt.getKeyChar();
         if(!(Character.isDigit(c))  )
@@ -187,9 +197,9 @@ public class AddScheme extends javax.swing.JFrame {
            evt.consume();
             
         }
-    }//GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_ProfitKeyTyped
 
-    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+    private void daysKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_daysKeyTyped
         // TODO add your handling code here:
           char c = evt.getKeyChar();
         if(!(Character.isDigit(c))  )
@@ -200,7 +210,25 @@ public class AddScheme extends javax.swing.JFrame {
            evt.consume();
             
         }
-    }//GEN-LAST:event_jTextField4KeyTyped
+    }//GEN-LAST:event_daysKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            String sql1 = "Insert into investment (SCHEME_NAME ,INVEST_AMOUNT,PROFIT_AMOUNT,DAYS)"+ " values( '"+SchemeName.getText()+"' , "+InvestAmount.getText()+" , "+Profit.getText()+", "+days.getText()+" )";
+            
+            int a = stmt.executeUpdate(sql1);
+            if(a>0)
+            {
+                JOptionPane.showMessageDialog(this, "Scheme Added");
+                ManagerInvestmentScr mss = new ManagerInvestmentScr();
+                close();
+                mss.setVisible(true);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddScheme.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,14 +266,21 @@ public class AddScheme extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField InvestAmount;
+    private javax.swing.JTextField Profit;
+    private javax.swing.JTextField SchemeName;
+    private javax.swing.JTextField days;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+
 }

@@ -274,8 +274,6 @@ private String UserId;
 
     public void setUserId(String UserId) {
         this.UserId = UserId;
-        
-        
     }
      public void close(){
  

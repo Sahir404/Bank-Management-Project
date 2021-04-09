@@ -70,6 +70,7 @@ public class CustomerInfo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Open = new javax.swing.JButton();
         ShowData = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(400, 100, 0, 0));
@@ -115,6 +116,13 @@ public class CustomerInfo extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,6 +135,8 @@ public class CustomerInfo extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
                 .addComponent(Open)
                 .addGap(18, 18, 18)
                 .addComponent(ShowData)
@@ -142,7 +152,8 @@ public class CustomerInfo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Open)
-                    .addComponent(ShowData))
+                    .addComponent(ShowData)
+                    .addComponent(jButton3))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -190,6 +201,13 @@ public class CustomerInfo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ShowDataActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ManagerMainScreen MMS = new ManagerMainScreen();
+        close();
+        MMS.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,6 +246,7 @@ public class CustomerInfo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Open;
     private javax.swing.JButton ShowData;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

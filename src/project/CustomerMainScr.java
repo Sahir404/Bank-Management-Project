@@ -212,6 +212,11 @@ public class CustomerMainScr extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 214, 107));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 204));
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -508,6 +513,15 @@ public class CustomerMainScr extends javax.swing.JFrame {
         stmt.setVisible(true);
         
     }//GEN-LAST:event_jPanel2MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        // TODO add your handling code here:
+        Investment invest = new Investment();
+         close();
+        invest.setUserId(UserID);
+        
+        invest.setVisible(true);
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments

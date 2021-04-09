@@ -95,7 +95,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         depo = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
+        Logout = new javax.swing.JPanel();
         logout = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         managername = new javax.swing.JLabel();
@@ -184,6 +184,11 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         );
 
         jPanel11.setBackground(new java.awt.Color(255, 214, 107));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 204));
         jLabel14.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -257,25 +262,30 @@ public class ManagerMainScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel13.setBackground(new java.awt.Color(227, 209, 138));
+        Logout.setBackground(new java.awt.Color(227, 209, 138));
+        Logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogoutMouseClicked(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel16.setText("Logout");
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout LogoutLayout = new javax.swing.GroupLayout(Logout);
+        Logout.setLayout(LogoutLayout);
+        LogoutLayout.setHorizontalGroup(
+            LogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LogoutLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel16)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        LogoutLayout.setVerticalGroup(
+            LogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LogoutLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel16)
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -330,7 +340,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
                         .addGap(183, 183, 183)
                         .addComponent(Transactions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(28, 28, 28)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -359,7 +369,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(Transactions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -430,6 +440,21 @@ public class ManagerMainScreen extends javax.swing.JFrame {
         CI.setVisible(true);
     }//GEN-LAST:event_Jpanel1MouseClicked
 
+    private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
+        // TODO add your handling code here:
+        BasicActivity Basic = new BasicActivity();
+        close();
+        Basic.setVisible(true);
+    }//GEN-LAST:event_LogoutMouseClicked
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        // TODO add your handling code here:
+        
+        ManagerInvestmentScr MIS = new ManagerInvestmentScr();
+        close();
+        MIS.setVisible(true);
+    }//GEN-LAST:event_jPanel11MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -467,6 +492,7 @@ public class ManagerMainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel1;
+    private javax.swing.JPanel Logout;
     private javax.swing.JPanel Transactions;
     private javax.swing.JPanel Withdraw;
     private javax.swing.JLabel customer;
@@ -482,7 +508,6 @@ public class ManagerMainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel managername;
     private javax.swing.JLabel withdraw;

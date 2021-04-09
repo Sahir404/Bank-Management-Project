@@ -5,6 +5,11 @@
  */
 package project;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -64,12 +69,13 @@ public class Investment extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Subscribe = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        subsLabel = new javax.swing.JLabel();
+        mTable = new javax.swing.JTable();
+        DataShow = new javax.swing.JButton();
+        scheme = new javax.swing.JLabel();
         Collectbtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -106,7 +112,12 @@ public class Investment extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jLabel1.setText("Investment Schemes");
 
-        jButton1.setText("Subscribe");
+        Subscribe.setText("Subscribe");
+        Subscribe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubscribeActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Note: You can Invest in only in one Scheme");
 
@@ -117,7 +128,7 @@ public class Investment extends javax.swing.JFrame {
             }
         });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        mTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -133,7 +144,14 @@ public class Investment extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable3);
+        jScrollPane4.setViewportView(mTable);
+
+        DataShow.setText("Show Data");
+        DataShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataShowActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,13 +167,15 @@ public class Investment extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 488, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(290, 290, 290)
+                .addGap(216, 216, 216)
                 .addComponent(back)
-                .addGap(37, 37, 37)
-                .addComponent(jButton1)
+                .addGap(23, 23, 23)
+                .addComponent(Subscribe)
+                .addGap(18, 18, 18)
+                .addComponent(DataShow)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,15 +188,21 @@ public class Investment extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back)
-                    .addComponent(jButton1))
+                    .addComponent(Subscribe)
+                    .addComponent(DataShow))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(21, 21, 21))
         );
 
-        subsLabel.setText("jLabel2");
+        scheme.setText("jLabel2");
 
         Collectbtn.setText("Collect");
+        Collectbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CollectbtnActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jLabel3.setText("Subscribed Scheme");
@@ -190,16 +216,17 @@ public class Investment extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Collectbtn)
-                            .addComponent(subsLabel)
-                            .addComponent(jLabel3)))
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(scheme, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Collectbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(177, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,10 +238,10 @@ public class Investment extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(subsLabel)
+                .addComponent(scheme)
                 .addGap(18, 18, 18)
                 .addComponent(Collectbtn)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -226,6 +253,133 @@ public class Investment extends javax.swing.JFrame {
        setVisible(false);
        new CustomerMainScr().toFront();
     }//GEN-LAST:event_backActionPerformed
+    int count = 0;
+    private void SubscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubscribeActionPerformed
+        // TODO add your handling code here:
+         try {
+            // TODO add your handling code here:
+            int i = mTable.getSelectedRow();
+            TableModel model = mTable.getModel();
+            
+            String SchemeName =""+model.getValueAt(i, 0).toString();
+            String investAmount =""+model.getValueAt(i, 1).toString();
+            String ObtainingAmount =""+model.getValueAt(i, 2).toString();
+            String Days =""+model.getValueAt(i, 3).toString();
+            
+            
+            
+            String sql1 = "select * from Customer  where UserId = '"+getUserId()+"' and Balance > "+investAmount ;
+            ResultSet rs1  = stmt.executeQuery(sql1);
+            if(rs1.next())
+            {
+            String sql3 = "select * from Customer  where UserId = '"+getUserId()+"' and scheme_name is not null" ;
+            ResultSet rs3  = stmt.executeQuery(sql3);
+            if(rs3.next())
+            {
+                 JOptionPane.showMessageDialog(this, "You can Subscribe only one at a time");
+            }else {
+            String sql = "Update customer set " +
+"                    SCHEME_NAME =  '"+SchemeName+"'," +
+"                   INVESTED_AMOUNT =  "+investAmount+"," +
+"                    OBTAINING_AMOUNT ="+ ObtainingAmount+"," +
+"                    Balance =Balance - "+ investAmount+"," +                    
+"                   DATEOFCOLLECTION = sysdate +"+Days+"" +                
+"                    where userid = '"+getUserId()+"'";
+            int j = stmt.executeUpdate(sql);
+            if(j>0)
+            {
+                JOptionPane.showMessageDialog(this, "Scheme Subscribe");
+            }
+            
+            System.out.println(SchemeName);
+            }
+            } else   JOptionPane.showMessageDialog(this, "Not Enough balance");
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Investment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         
+    }//GEN-LAST:event_SubscribeActionPerformed
+
+    private void DataShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataShowActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+             DefaultTableModel tblModel = null;
+            
+           
+            
+            String sql1 = "Select * from customer where UserId  = '" + getUserId()+"'";
+            ResultSet rs2 = stmt.executeQuery(sql1);
+            if(rs2.next())
+            {
+                String mSchemeName = rs2.getString("SCHEME_NAME");
+                scheme.setText(mSchemeName);
+            }
+            
+             String sql = "Select * from INVESTMENT";
+            ResultSet rs = stmt.executeQuery(sql);
+                if(count == 0){
+            while(rs.next())
+            {
+                System.out.println("add Table");
+                String mSchemeName = rs.getString("SCHEME_NAME");
+                int mInvestAmount  = rs.getInt("INVEST_AMOUNT");
+                int mPrfitAmount = rs.getInt("PROFIT_AMOUNT");
+                int mDays = rs.getInt("DAYS");
+                
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("mm//dd/yyyy , HH:MM:SS , a");
+//                String mDate = dateFormat.format(date);
+                
+                Object Row[] = {mSchemeName,mInvestAmount,mPrfitAmount,mDays};
+                 tblModel = (DefaultTableModel)mTable.getModel();
+               
+                
+                tblModel.addRow(Row);
+                
+                
+                }
+            count++;
+               
+                
+            }
+         } catch (SQLException ex) {
+            Logger.getLogger(Investment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DataShowActionPerformed
+
+    private void CollectbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CollectbtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            int ObtainAmount;
+            String sql1 = "select * from Customer  where UserId = '"+getUserId()+"' and sysdate > DATEOFCOLLECTION " ;
+            ResultSet rs1  = stmt.executeQuery(sql1);
+            if(rs1.next())
+            {
+                String sql2 = "update customer SET " +
+                
+                "Balance =Balance+ OBTAINING_AMOUNT ," +
+                "SCHEME_NAME = '',"+
+                "INVEST_AMOUNT = 0," +
+                "DATEOFCOLLECTION = ''," +
+                "OBTAINING_AMOUNT  = 0" +
+                 "where userid = '"+getUserId()+"'";
+                int j = stmt.executeUpdate(sql2);
+                if(j>0)
+                {
+                    JOptionPane.showMessageDialog(this, "Amount collected");
+                } 
+            }else JOptionPane.showMessageDialog(this, "There is time to collect the Amount");
+        } catch (SQLException ex) {
+            Logger.getLogger(Investment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_CollectbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,8 +418,9 @@ public class Investment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Collectbtn;
+    private javax.swing.JButton DataShow;
+    private javax.swing.JButton Subscribe;
     private javax.swing.JButton back;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -276,7 +431,18 @@ public class Investment extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JLabel subsLabel;
+    private javax.swing.JTable mTable;
+    private javax.swing.JLabel scheme;
     // End of variables declaration//GEN-END:variables
+
+private String UserId;
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String UserId) {
+        this.UserId = UserId;
+    }
+
 }
