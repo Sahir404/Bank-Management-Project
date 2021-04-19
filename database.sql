@@ -1,3 +1,1 @@
-update customer set 
-scheme_name = ''
-WHERE userid = 'sahir';
+select * from Customer  where UserId = 'sahir' OR 	DATEOFCOLLECTION < SYSDATE

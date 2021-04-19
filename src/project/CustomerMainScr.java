@@ -87,7 +87,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
     public  void scaleImage3(String url ,javax.swing.JLabel  lbl )
     {
         System.out.println("changed image");
-        ImageIcon imgicon = new ImageIcon("src\\Images\\"+url); 
+        ImageIcon imgicon = new ImageIcon(""+url); 
         Image img = imgicon.getImage();
         Image imgscale = img.getScaledInstance(lbl.getWidth(),lbl.getHeight(),Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgscale);
@@ -131,21 +131,21 @@ public class CustomerMainScr extends javax.swing.JFrame {
         Transfer_money = new RoundedPanel(50,new java.awt.Color(255, 255, 204));
         ImageLBL = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new RoundedPanel(50,new java.awt.Color(255,214,107));
         jLabel6 = new javax.swing.JLabel();
         Investment = new javax.swing.JLabel();
         jPanel2 = new RoundedPanel(40,new java.awt.Color(204, 255, 189));
         Statement = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ChangPass = new javax.swing.JPanel();
+        ChangPass = new RoundedPanel(50,new java.awt.Color(228,186,212));
         Password = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        Logout = new javax.swing.JPanel();
+        Logout = new RoundedPanel(50,new java.awt.Color(227,209,138));
         logout = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        AccountNo = new javax.swing.JLabel();
         Namelbl = new javax.swing.JLabel();
-        Info = new javax.swing.JPanel();
+        Info = new RoundedPanel(80,new java.awt.Color(200,238,217));
         logo = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -211,7 +211,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 214, 107));
+        jPanel3.setBackground(new java.awt.Color(255, 113, 113));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel3MouseClicked(evt);
@@ -232,18 +232,21 @@ public class CustomerMainScr extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(Investment, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addContainerGap()
+                .addComponent(Investment, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Investment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(Investment, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -281,7 +284,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        ChangPass.setBackground(new java.awt.Color(228, 186, 212));
+        ChangPass.setBackground(new java.awt.Color(255, 113, 113));
         ChangPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ChangPassMouseClicked(evt);
@@ -296,8 +299,9 @@ public class CustomerMainScr extends javax.swing.JFrame {
         ChangPassLayout.setHorizontalGroup(
             ChangPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ChangPassLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addGap(0, 23, Short.MAX_VALUE))
         );
@@ -314,7 +318,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        Logout.setBackground(new java.awt.Color(227, 209, 138));
+        Logout.setBackground(new java.awt.Color(255, 113, 113));
         Logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LogoutMouseClicked(evt);
@@ -347,7 +351,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        jLabel2.setText("jLabel2");
+        AccountNo.setText("jLabel2");
 
         Namelbl.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         Namelbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -355,7 +359,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
         Namelbl.setToolTipText("");
         Namelbl.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        Info.setBackground(new java.awt.Color(200, 238, 217));
+        Info.setBackground(new java.awt.Color(255, 113, 113));
         Info.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 InfoMouseClicked(evt);
@@ -393,7 +397,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AccountNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Namelbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Transfer_money, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -417,7 +421,7 @@ public class CustomerMainScr extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(Namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AccountNo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -561,12 +565,14 @@ public class CustomerMainScr extends javax.swing.JFrame {
 
    
 
-    public void setName(String Name) {
-        Namelbl.setText("Name : "+Name);
+    public void setName(String Name , String AccNO) {
+        Namelbl.setText("Name :  "+Name);
         UserID = Name;
+        AccountNo.setText("Account Number : "+AccNO) ;
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AccountNo;
     private javax.swing.JPanel ChangPass;
     private javax.swing.JLabel ImageLBL;
     private javax.swing.JPanel Info;
@@ -576,7 +582,6 @@ public class CustomerMainScr extends javax.swing.JFrame {
     private javax.swing.JLabel Password;
     private javax.swing.JLabel Statement;
     private javax.swing.JPanel Transfer_money;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -5,6 +5,8 @@
  */
 package project;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.lang.System.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -237,7 +239,12 @@ public class Transactions extends javax.swing.JFrame {
             }
         });
     }
-
+public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableNo;
     private javax.swing.JButton jButton1;

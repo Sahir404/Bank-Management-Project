@@ -213,11 +213,10 @@ public class TransferScr extends javax.swing.JFrame {
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         // TODO add your handling code here:
-        close();
-
-        CustomerMainScr CMS = new CustomerMainScr();
-        CMS.setName(getUserId());
-        CMS.setVisible(true);
+                close();
+                    CustomerMainScr CMS = new CustomerMainScr();
+                    CMS.setName(getUserId() , ""+AccountNo());
+                    CMS.setVisible(true);
     }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
@@ -281,5 +280,21 @@ private String UserId;
  Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
  
  }
+       public int AccountNo()
+    {
+        int acc = 0;
+        try {
+            String sql = "Select * from customer where UserId  = '" + getUserId() + "'";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                acc = rs.getInt("ACOUNT_NO");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return acc;
+    }
 
 }

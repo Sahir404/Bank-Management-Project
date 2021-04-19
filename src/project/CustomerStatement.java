@@ -182,7 +182,7 @@ public class CustomerStatement extends javax.swing.JFrame {
         close();
 
         CustomerMainScr CMS = new CustomerMainScr();
-        CMS.setName(getUserId());
+       CMS.setName(getUserId() , ""+AccountNo());
         CMS.setVisible(true);
     }//GEN-LAST:event_BackBtnActionPerformed
 
@@ -297,6 +297,22 @@ public class CustomerStatement extends javax.swing.JFrame {
  Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
  
  }
+    public int AccountNo()
+    {
+        int acc = 0;
+        try {
+            String sql = "Select * from customer where UserId  = '" + getUserId() + "'";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                acc = rs.getInt("ACOUNT_NO");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return acc;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackBtn;

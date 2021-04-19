@@ -174,9 +174,9 @@ public class Login extends javax.swing.JFrame {
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(this, "You are loged in succesfully");
                     close();
-
+                    
                     CustomerMainScr CMS = new CustomerMainScr();
-                    CMS.setName(UserId.getText().toString());
+                    CMS.setName(UserId.getText().toString() ,""+ AccountNo());
                     CMS.setVisible(true);
 
                 } else {
@@ -189,7 +189,22 @@ public class Login extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_Login_btnActionPerformed
-
+    public int AccountNo()
+    {
+        int acc = 0;
+        try {
+            String sql = "Select * from customer where UserId  = '" + UserId.getText().toString() + "' And Password = '" + Password.getText() + "'";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                acc = rs.getInt("ACOUNT_NO");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return acc;
+    }
     /**
      * @param args the command line arguments
      */

@@ -71,6 +71,7 @@ public class ChangePassword extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         ConfPass = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        BackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 200, 0, 0));
@@ -89,26 +90,35 @@ public class ChangePassword extends javax.swing.JFrame {
             }
         });
 
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(OldPass)
-                    .addComponent(NewPass)
-                    .addComponent(ConfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BackBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(OldPass)
+                            .addComponent(NewPass)
+                            .addComponent(ConfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))))
                 .addContainerGap(115, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(152, 152, 152))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,9 +135,11 @@ public class ChangePassword extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(ConfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(jButton1)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(BackBtn))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,6 +175,15 @@ public class ChangePassword extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+        close();
+
+        CustomerMainScr CMS = new CustomerMainScr();
+        CMS.setName(getUserId() , ""+AccountNo());
+        CMS.setVisible(true);
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +221,7 @@ public class ChangePassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
     private javax.swing.JPasswordField ConfPass;
     private javax.swing.JPasswordField NewPass;
     private javax.swing.JPasswordField OldPass;
@@ -223,5 +245,21 @@ private String UserId;
  Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
  
  }
+    public int AccountNo()
+    {
+        int acc = 0;
+        try {
+            String sql = "Select * from customer where UserId  = '" + getUserId() + "'";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                acc = rs.getInt("ACOUNT_NO");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return acc;
+    }
 
 }

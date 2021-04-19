@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package project;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,10 +73,10 @@ public class Investment extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Subscribe = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         mTable = new javax.swing.JTable();
         DataShow = new javax.swing.JButton();
+        BackBtn = new javax.swing.JButton();
         scheme = new javax.swing.JLabel();
         Collectbtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -121,13 +123,6 @@ public class Investment extends javax.swing.JFrame {
 
         jLabel4.setText("Note: You can Invest in only in one Scheme");
 
-        back.setText("Back");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-
         mTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -153,29 +148,38 @@ public class Investment extends javax.swing.JFrame {
             }
         });
 
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(26, 265, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(216, 216, 216)
-                .addComponent(back)
-                .addGap(23, 23, 23)
-                .addComponent(Subscribe)
-                .addGap(18, 18, 18)
-                .addComponent(DataShow)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(199, 199, 199)
+                        .addComponent(BackBtn)
+                        .addGap(40, 40, 40)
+                        .addComponent(Subscribe)
+                        .addGap(18, 18, 18)
+                        .addComponent(DataShow))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,15 +191,13 @@ public class Investment extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(back)
                     .addComponent(Subscribe)
-                    .addComponent(DataShow))
+                    .addComponent(DataShow)
+                    .addComponent(BackBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(21, 21, 21))
         );
-
-        scheme.setText("jLabel2");
 
         Collectbtn.setText("Collect");
         Collectbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -217,15 +219,14 @@ public class Investment extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(scheme, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Collectbtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(Collectbtn)
+                            .addComponent(scheme, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -237,22 +238,15 @@ public class Investment extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(scheme)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scheme, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Collectbtn)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        // TODO add your handling code here:
-       this.toBack();
-       setVisible(false);
-       new CustomerMainScr().toFront();
-    }//GEN-LAST:event_backActionPerformed
     int count = 0;
     private void SubscribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubscribeActionPerformed
         // TODO add your handling code here:
@@ -355,7 +349,7 @@ public class Investment extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             int ObtainAmount;
-            String sql1 = "select * from Customer  where UserId = '"+getUserId()+"' and sysdate > DATEOFCOLLECTION " ;
+            String sql1 = "select * from Customer  where UserId = '"+getUserId()+"' and DATEOFCOLLECTION < SYSDATE " ;
             ResultSet rs1  = stmt.executeQuery(sql1);
             if(rs1.next())
             {
@@ -363,7 +357,7 @@ public class Investment extends javax.swing.JFrame {
                 
                 "Balance =Balance+ OBTAINING_AMOUNT ," +
                 "SCHEME_NAME = '',"+
-                "INVEST_AMOUNT = 0," +
+                "INVESTED_AMOUNT = 0," +
                 "DATEOFCOLLECTION = ''," +
                 "OBTAINING_AMOUNT  = 0" +
                  "where userid = '"+getUserId()+"'";
@@ -380,6 +374,15 @@ public class Investment extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_CollectbtnActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+        close();
+
+        CustomerMainScr CMS = new CustomerMainScr();
+       CMS.setName(getUserId() , ""+AccountNo());
+        CMS.setVisible(true);
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,10 +420,10 @@ public class Investment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
     private javax.swing.JButton Collectbtn;
     private javax.swing.JButton DataShow;
     private javax.swing.JButton Subscribe;
-    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -444,5 +447,26 @@ private String UserId;
     public void setUserId(String UserId) {
         this.UserId = UserId;
     }
-
+     public void close(){
+ 
+ WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+ Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+ 
+ }
+      public int AccountNo()
+    {
+        int acc = 0;
+        try {
+            String sql = "Select * from customer where UserId  = '" + getUserId() + "'";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                acc = rs.getInt("ACOUNT_NO");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return acc;
+    }
 }

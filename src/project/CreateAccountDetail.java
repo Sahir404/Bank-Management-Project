@@ -383,6 +383,8 @@ public class CreateAccountDetail extends javax.swing.JFrame {
             String Date =" ' "+ mDay+"/"+mMonth+"/"+mYear+"'" ;
             String mRelgion  = Religion.getSelectedItem().toString();
             String userid = UserIdText.getText().toString();
+              
+              
             String sql1 = "Update customer set " +
 "                    FATHER_NAME =  '"+FName+"'," +
 "                   DOB =  "+Date+"," +
@@ -392,6 +394,7 @@ public class CreateAccountDetail extends javax.swing.JFrame {
 "                    ADDRESS ='"+mAdress+"'," +
 "                   CITY = '"+mCity+"'," +
 "                    OCUPATION = '"+mOccupation+"'," +
+"                    ACOUNT_NO = "+AccountNo()+"," +
 "                    PROVINCE = '"+mProvince+"'," +
 "                   RELIGION = '"+mRelgion+"'" +                  
 "                    where userid = '"+userid+"'";
@@ -446,6 +449,23 @@ public class CreateAccountDetail extends javax.swing.JFrame {
         });
          
        
+    }
+   public int AccountNo()
+    {
+        int a = 0;
+        try {
+            a = (int) (1000000+(Math.random()*9999999));
+            String sql = "Select * from Customer where ACOUNT_NO  = "+a+"";
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                AccountNo ();
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccountDetail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
     }
     
 

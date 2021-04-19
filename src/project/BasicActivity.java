@@ -5,9 +5,10 @@
  */
 package project;
 
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.sql.*;
+import javax.swing.ImageIcon;
 
 
 
@@ -23,7 +24,9 @@ public class BasicActivity extends javax.swing.JFrame  {
      */
      private String check ;
     public BasicActivity() {
+       
         initComponents();
+         scaleImage3("Sky.png",jLabel1);
     }
 
     /**
@@ -36,13 +39,13 @@ public class BasicActivity extends javax.swing.JFrame  {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         Manager_button = new javax.swing.JButton();
         Customer_button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(400, 100, 500, 300));
-        setMinimumSize(new java.awt.Dimension(600, 600));
+        setMinimumSize(new java.awt.Dimension(800, 520));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -53,13 +56,6 @@ public class BasicActivity extends javax.swing.JFrame  {
         });
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Welcome To Aladin Bank");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 20, 560, 100);
-
         Manager_button.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         Manager_button.setText("As Manager ");
         Manager_button.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +64,7 @@ public class BasicActivity extends javax.swing.JFrame  {
             }
         });
         jPanel1.add(Manager_button);
-        Manager_button.setBounds(140, 130, 260, 50);
+        Manager_button.setBounds(260, 190, 260, 50);
 
         Customer_button.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         Customer_button.setText("As Customer");
@@ -78,10 +74,16 @@ public class BasicActivity extends javax.swing.JFrame  {
             }
         });
         jPanel1.add(Customer_button);
-        Customer_button.setBounds(140, 190, 260, 50);
+        Customer_button.setBounds(260, 260, 260, 50);
+
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 800, 520);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 20, 570, 330);
+        jPanel1.setBounds(0, 0, 800, 520);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -97,6 +99,17 @@ public class BasicActivity extends javax.swing.JFrame  {
         
         
     }//GEN-LAST:event_Manager_buttonActionPerformed
+    
+    public  void scaleImage3(String url ,javax.swing.JLabel  lbl )
+    {
+        System.out.println("changed image");
+        ImageIcon imgicon = new ImageIcon(""+url); 
+        Image img = imgicon.getImage();
+        Image imgscale = img.getScaledInstance(lbl.getWidth(),lbl.getHeight(),Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgscale);
+        lbl.setIcon(scaledIcon);
+        
+    }
     
     private void Customer_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Customer_buttonActionPerformed
         // TODO add your handling code here:
